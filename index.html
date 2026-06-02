@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App by Yusuf AR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+      <div class="todo-app">
+        <div class="title">
+          <h1>To-Do App</h1>
+          <p class="author">by Yusuf AR</p>
+        </div>
+        <div class="stat-container">
+          <div class="details-progress">
+            <h3>Your progress...</h3>
+            <div id="progressbar">
+              <div id="progress"></div>
+            </div>
+          </div>
+          <div class="stats-number">
+            <p id="numbers">0 / 0</p>
+          </div>
+        </div>
+        <form class="input-area">
+          <input type="text" id="todo-input" placeholder="Add a new task...">
+          <select id="priority-input">
+            <option value="1">Low</option>
+            <option value="2">Med</option>
+            <option value="3">High</option>
+          </select>
+          <button type="submit" id="add-btn"><i class="fa-solid fa-plus"></i></button>
+        </form>
+        <div class="todos-container">
+          <ul id="task-list">
+              <li class="loading">Loading cuy...</li>
+          </ul>
+          <img class="empty-image" src="./assets/To-Do-List-No-Tasks.svg" alt="Image of to-do list note">
+        </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
