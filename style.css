@@ -41,9 +41,9 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Supaya jarak tulisan by Yusuf AR bisa mepet dengan statistik container */
+/* Pulls the "by Yusuf AR" byline closer to the stats container */
 .todo-app > *:first-child {
-  margin-bottom: -25px; 
+  margin-bottom: -25px;
 }
 
 .title {
@@ -63,12 +63,12 @@ body {
   text-align: right;
   font-weight: bold;
   color: rgba(180, 230, 255, 0.9);
-  text-shadow: 
+  text-shadow:
     0 0 5px  rgba(0, 195, 255, 0.6),
     0 0 15px rgba(0, 195, 255, 0.3);
   }
 
-  /* Staistik Container */
+  /* Stats container */
 .stat-container {
   padding: 15px 20px;
   border-radius: 10px;
@@ -88,17 +88,17 @@ body {
   color: #fff;
 }
 
-/* Progressbar yang sudah diupayakan agar seperti 3D, mohon maaf kalau masih belum bagus */
+/* Progress bar styled with a 3D tube effect */
 #progressbar {
   width: 100%;
-  height: 20px; /* Sedikit lebih tebal agar efek 3D terlihat */
-  background: rgba(0, 0, 0, 0.2); /* Latar belakang lebih gelap untuk kontras */
+  height: 20px; /* Slightly thicker so the 3D effect reads clearly */
+  background: rgba(0, 0, 0, 0.2); /* Darker background for contrast */
   border-radius: 20px;
   position: relative;
   margin-top: 15px;
-  
-  /* Efek tabung/lubang */
-  box-shadow: 
+
+  /* Recessed tube effect */
+  box-shadow:
     inset 2px 2px 5px rgba(0, 0, 0, 0.5),
     inset -1px -1px 2px rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -107,24 +107,24 @@ body {
 
 #progress {
   height: 100%;
-  /* Gradien untuk efek silinder/cairan mengkilap */
+  /* Gradient for a glossy liquid/cylinder effect */
   background: linear-gradient(
     to bottom,
-    #22ff77 0%,       /* Highlight atas */
-    #0ef66e 40%,      /* Warna utama */
-    #0bc357 60%,      /* Bayangan tengah */
-    #09a349 100%      /* Dasar gelap */
+    #22ff77 0%,       /* Top highlight */
+    #0ef66e 40%,      /* Main color */
+    #0bc357 60%,      /* Mid shadow */
+    #09a349 100%      /* Dark base */
   );
-  
+
   border-radius: 20px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Efek kilauan kaca di atas cairan */
+
+  /* Glass shine effect over the liquid */
   position: relative;
-  box-shadow: 0 0 15px rgba(14, 246, 110, 0.4); /* Glow hijau */
+  box-shadow: 0 0 15px rgba(14, 246, 110, 0.4); /* Green glow */
 }
 
-/* Menambahkan kilauan (glossy) tambahan menggunakan pseudo-element */
+/* Adds an extra glossy highlight using a pseudo-element */
 #progress::after {
   content: '';
   position: absolute;
@@ -137,7 +137,7 @@ body {
   filter: blur(1px);
 }
 
-/* Frame tempat statistik number */
+/* Frame for the stats number */
 .stats-number {
   position: relative;
   display: flex;
@@ -167,7 +167,7 @@ body {
   }
 }
 
-/* Number statistik progress/total */
+/* Progress/total stat number */
 #numbers {
   display: flex;
   align-items: center;
@@ -177,12 +177,12 @@ body {
   font-weight: 900;
   font-size: 1.1rem;
   color: #0ef;
-  text-shadow: 
+  text-shadow:
     1px 1px 0px rgba(0, 0, 0, 0.2),
     2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* Form area untuk input data */
+/* Form area for task input */
 .input-area {
   display: flex;
   flex-wrap: wrap;
@@ -192,7 +192,7 @@ body {
   width: 100%;
 }
 
-/* Text area untuk mengisi nama kegiatan */
+/* Text input for the task title */
 #todo-input {
   flex: 1;
   padding: 10px 17px;
@@ -212,9 +212,9 @@ body {
   color: #bcbcbc;
 }
 
-/* Dropdown select untuk pilihan priority kegiatan, mohon maaf kalau masih belum berhasil setting hover di option (karena ilmunya masih dangkal) */
-#priority-input {  
-    appearance: base-select;  /* Karena memakai select standar bawaan browser perlu perlakuan khusus untuk customisasi */
+/* Priority dropdown select */
+#priority-input {
+    appearance: base-select;  /* Needed to customize the native browser select */
     width: 80px;
     padding: 6px 15px 5px;
     border: 1px solid #ddd;
@@ -230,7 +230,7 @@ body {
     border: rgba(182, 176, 201, 0.01);
   }
 
-  option {  /* Customisasi option dalam dropdown select */
+  option {  /* Styling for the dropdown options */
     color: black;
     background-color: rgba(182, 176, 201, 1);
     padding: 2px 20px 2px 10px;
@@ -239,7 +239,7 @@ body {
     font-weight: 600;
   }
 
-  option:first-child {  /* Mengganti background color masing2 sesuai jenis priority */
+  option:first-child {  /* Background color per priority level */
     background-color: #4caf50;
   }
 
@@ -252,7 +252,7 @@ body {
   }
 }
 
-/* Customisasi dari badge priority yg melekat pada list tugas hasil generate dari javascript */
+/* Priority badge attached to each task item rendered by JS */
 .priority-badge {
   font-size: 0.7em;
   padding: 2px 6px;
@@ -264,11 +264,11 @@ body {
   font-weight: bold;
 }
 
-.prio-3 { background: #ff4d4d; } /* Warna badge untuk high priority */
-.prio-2 { background: #ffa500; } /* Warna badge untuk medium priority */
-.prio-1 { background: #4caf50; } /* Warna badge untuk low priority */
+.prio-3 { background: #ff4d4d; } /* High priority badge color */
+.prio-2 { background: #ffa500; } /* Medium priority badge color */
+.prio-1 { background: #4caf50; } /* Low priority badge color */
 
-/* Tombol tambah tugas */
+/* Add-task button */
 #add-btn {
   display: flex;
   align-items: center;
@@ -288,7 +288,7 @@ body {
   background: #5240ab;
 }
 
-/* Container untuk membungkus daftar tugas baik pada saat masih kosong maupun setelah ada isi list tugas */
+/* Wraps the task list, whether empty or populated */
 .todos-container {
   display: flex;
   align-items: center;
@@ -299,34 +299,34 @@ body {
   padding-right: 5px;
 }
 
-/* Penambahan scrollbar untuk daftar tugas jika melebihi viewpoint */
-.todos-container::-webkit-scrollbar { /* Customisasi scrollbar supaya lebih kecil dan tidak mencolok */
+/* Custom scrollbar for the task list when it overflows */
+.todos-container::-webkit-scrollbar { /* Slim, unobtrusive scrollbar */
   width: 6px;
 }
 
-.todos-container::-webkit-scrollbar-track { /* Customisasi bagian trek (latar belakang) yang dilewati thumb */
+.todos-container::-webkit-scrollbar-track { /* Scrollbar track background */
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
 }
 
-.todos-container::-webkit-scrollbar-thumb { /* Customisasi bagian scrollbar yang dapat diseret */
+.todos-container::-webkit-scrollbar-thumb { /* Draggable scrollbar thumb */
   background: rgba(182, 176, 201, 0.5);
   border-radius: 10px;
 }
 
-/* Daftar dari list tugas  */
+/* Task list */
 #task-list {
   width: 100%;
-  align-self: flex-start; 
+  align-self: flex-start;
 }
 
-/* Gambar yang disediakan untuk mengisi disaat daftar tugas masih kosong */
+/* Empty-state illustration shown when there are no tasks */
 .empty-image {
   max-width: 300px;
   margin-top: 50px;
 }
 
-/* Sebuah tugas dengan berbagai fiturnya, tugas ini sebagian besar hasil generate dari javascript */
+/* A single task item, mostly rendered by JS */
 #task-list li {
   display: flex;
   align-items: center;
@@ -347,7 +347,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Pengelompokan untuk checkbox, teks tugas dan priority badge */
+/* Groups the checkbox, task text, and priority badge */
 .task-content {
   display:flex;
   gap: 10px;
@@ -355,7 +355,7 @@ body {
   flex: 1;
 }
 
-/* Checkbox hasil generate javascript untuk menandai tugas yg belum dan yang sudah dikerjakan */
+/* Checkbox rendered by JS to mark a task done/not done */
 #task-list li .checkbox {
   min-width: 20px;
   height: 20px;
@@ -383,26 +383,26 @@ body {
   font-size: 1rem;
 }
 
-/* Teks tugas yang diinput oleh user */
+/* Task text entered by the user */
 .todo-text {
   margin-left: 10px;
   word-wrap: break-word;
 }
 
-/* Penanda jika tugas sudah dikerjakan */
+/* Strikethrough style for completed tasks */
 #task-list li.completed span {
   text-decoration: 2px line-through #000;
   color: rgba(0255, 255, 255, 0.5);
 }
 
-/* Container Button hasil generate javascript yang berisi 2 jenis button yaitu edit button dan delete button */
+/* Container for the edit and delete buttons rendered by JS */
 .task-buttons {
   display: flex;
   gap: 10px;
   margin-right: auto;
 }
 
-/* Customisasi kedua button */
+/* Shared button styling */
 .task-buttons button {
   background: rgba(182, 176, 201, 0.3);
   border: none;
@@ -422,24 +422,24 @@ body {
   transform: scale(1.2);
 }
 
-/* Customisasi hanya edit button */
+/* Edit button only */
 .task-buttons .edit-btn {
   background: #ffbf00;
 }
 
-/* Customisasi hanya delete button */
+/* Delete button only */
 .task-buttons .delete-btn {
   background: #ff6f91;
 }
 
-/* Customisasi untuk button pada saat tugas sudah completed */
+/* Button state when a task is completed */
 .btn-disabled {
   opacity: 0.5;
   pointer-events: none;
   cursor: not-allowed;
 }
 
-/* Customisasi input yang akan muncul pada saat edit button ditekan */
+/* Input shown when editing a task */
 .edit-input {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid #fff;
@@ -450,4 +450,3 @@ body {
   font-family: inherit;
   width: 100%;
 }
-

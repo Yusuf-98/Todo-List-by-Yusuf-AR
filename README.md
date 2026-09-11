@@ -1,231 +1,36 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/U8u0zKrs)
-# Assignment 5 - To-Do App dengan Class, Async & DOM (atau CLI)
+# To-Do App
 
-## Selamat Datang
+A fast, no-framework task manager built with vanilla JavaScript — no build step, just open and run. Add tasks, set priorities, track progress, and pick up right where you left off — everything you add is saved locally in your browser.
 
-Halo teman-teman, selamat datang di assignment kelima kalian. Di tahap ini, kita mulai masuk ke konsep yang lebih dekat dengan real-world application.
+🚀 **Live demo:** https://todo-list-by-yusuf-ar.vercel.app/
 
-Kalian tidak hanya akan menulis logic, tapi juga mulai mengelola data, menangani error, dan bekerja dengan proses asynchronous. Ini adalah fondasi penting sebelum kalian masuk ke dunia backend atau aplikasi yang lebih kompleks.
+## Features
 
-Assignment ini akan membantu kalian memahami bagaimana class digunakan untuk memodelkan data, bagaimana async/await bekerja dalam mengambil data, serta bagaimana berinteraksi dengan user baik melalui browser maupun command line.
-
-## Konteks Assignment
-
-Kalian akan membuat aplikasi **To-Do List** dengan dua pilihan implementasi:
-
-### Opsi A: Browser App (Direkomendasikan)
-
-Aplikasi berbasis web yang menggunakan DOM untuk menampilkan dan mengelola To-Do.
-
-### Opsi B: CLI App
-
-Aplikasi berbasis command-line menggunakan Node.js.
-
-Kalian bebas memilih salah satu, tapi pastikan semua konsep utama tetap digunakan.
-
----
+- Add, edit, and delete tasks
+- Priority levels (Low / Medium / High) with color-coded tags
+- Progress tracker (completed / total) with an animated ring and progress bar
+- Tasks persist across page reloads via `localStorage`
+- Loads its initial task list from a custom REST API ([todoList-API](https://github.com/Yusuf-98/todoList-API), served through [my-json-server](https://my-json-server.typicode.com/))
 
 ## Tech Stack
 
-- JavaScript
-- Class
-- Async/Await
-- Fetch API (untuk browser)
-- DOM Manipulation (browser)
-- Node.js (opsional untuk CLI)
+- HTML5, CSS3
+- JavaScript (ES6+ Classes, Async/Await)
+- DOM manipulation
+- Fetch API for the initial data load
+- LocalStorage for persistence
 
----
+## Getting Started
 
-## Checklist yang Harus Diselesaikan
-
-1. Menggunakan class (`Todo`, `TodoList`) dengan constructor dan method
-2. Mengimplementasikan async/await (fetch atau Promise)
-3. Menggunakan try/catch untuk error handling
-4. Validasi input user
-5. Menampilkan dan mengelola data To-Do
-6. Menangani kondisi seperti list kosong
-
----
-
-## Arahan dari Saya
-
-### 1. Sebelum Menulis Kode
-
-Pahami dulu apa itu To-Do App:
-
-- Apa saja data yang dibutuhkan?
-- Bagaimana flow user?
-- Apa saja aksi yang bisa dilakukan user?
-
-Contoh:
-
-- Tambah task
-- Tandai selesai
-- Hapus task
-- Lihat semua task
-
----
-
-### 2. Menggunakan Class
-
-Gunakan class untuk memodelkan data.
-
-Minimal:
-
-- `Todo` → merepresentasikan satu task
-- `TodoList` → mengelola kumpulan task
-
-Pikirkan:
-
-- Apa saja property dari Todo?
-- Method apa saja yang dibutuhkan di TodoList?
-
-Opsional (nilai tambah):
-
-- Inheritance
-- Static method
-
----
-
-### 3. Async & Data Handling
-
-Jika kalian memilih **browser app**:
-
-- Gunakan `fetch` dengan `async/await`
-- Ambil data dari API (misalnya JSONPlaceholder)
-- Handle kemungkinan error dengan `try/catch`
-
-Jika CLI:
-
-- Gunakan `Promise` untuk simulasi async (misalnya delay atau load data)
-
----
-
-### 4. Error Handling
-
-Gunakan `try/catch` untuk:
-
-- Input tidak valid
-- Fetch gagal
-- Data tidak sesuai
-
-Jangan biarkan program crash tanpa pesan yang jelas.
-
----
-
-### 5. DOM Manipulation (Jika Browser)
-
-Gunakan:
-
-- `querySelector` / `getElementById`
-- `createElement`
-- `appendChild`
-- `addEventListener`
-
-Pastikan:
-
-- UI update saat data berubah
-- Tidak reload halaman setiap aksi
-
----
-
-### 6. CLI Logic (Jika CLI)
-
-Implementasikan function seperti:
-
-- `generateUniqueId()`
-- `addTodo()`
-- `markTodoCompleted()`
-- `deleteTodo()`
-- `listTodos()`
-- `runTodoApp()`
-
-Gunakan loop untuk menu interaktif.
-
----
-
-### 7. Validasi & Feedback
-
-Pastikan:
-
-- Input kosong tidak diterima
-- User mendapat feedback yang jelas
-- Tangani kondisi list kosong dengan baik
-
----
-
-### 8. Kerapihan Kode
-
-Pastikan:
-
-- Code terstruktur
-- Nama variable jelas
-- Function tidak terlalu panjang
-- Mudah dibaca oleh orang lain
-
----
-
-## Struktur Folder (Contoh)
-
-### Browser App
+This is a static site — no build step required.
 
 ```bash
-root/
-    ├── index.html
-    ├── script.js
-    ├── style.css
+git clone https://github.com/Yusuf-98/Todo-List-by-Yusuf-AR.git
+cd Todo-List-by-Yusuf-AR
 ```
 
-### CLI App
+Then simply open `index.html` in your browser, or serve the folder with any static server (e.g. the VS Code "Live Server" extension).
 
-```bash
-root/
-    ├── index.js
-    ├── package.json
-```
+## Author
 
-### Cara instalasi di Cli App
-
-1. `npm init -y`
-2. `npm install prompt-sync`
-
----
-
-## Workflow yang Disarankan
-
-1. Tentukan opsi (Browser / CLI)
-2. Buat desain flow aplikasi
-3. Implement class terlebih dahulu
-4. Tambahkan logic async
-5. Tambahkan error handling
-6. Implement UI (DOM atau CLI)
-7. Test berbagai skenario
-8. Refactor code
-
----
-
-## Kriteria Penilaian
-
-| No  | Kriteria                         | Bobot    |
-| --- | -------------------------------- | -------- |
-| 1   | Pemenuhan requirement            | 40%      |
-| 2   | JavaScript Usage                 | 30%      |
-| 3   | Problem solving & error handling | 20%      |
-| 4   | Kerapihan dan keterbacaan kode   | 10%      |
-|     | **Total**                        | **100%** |
-
----
-
-## Pesan Terakhir
-
-Di assignment ini, kalian mulai masuk ke level di mana code kalian menyerupai aplikasi nyata.
-
-Jangan hanya fokus “jalan”, tapi fokus juga:
-
-- Apakah code kalian scalable?
-- Apakah mudah dibaca?
-- Apakah mudah dikembangkan?
-
-Kalau kalian bisa menguasai assignment ini dengan baik, kalian sudah satu langkah lebih dekat ke real-world developer.
-
-Selamat mengerjakan 🚀
+Built by [Yusuf AR](https://github.com/Yusuf-98).

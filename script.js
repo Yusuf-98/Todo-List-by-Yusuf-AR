@@ -8,105 +8,111 @@ class Todo {
     }
 }
 
-// Inherit method-method dari class Todo
+// Inherits from the Todo class
 class PriorityTodo extends Todo {
     constructor(id, title, completed, priority) {
-        super(id, title, completed);    // Method-method dari parent
-        this.priority = priority;   // Method inherit
+        super(id, title, completed);    // Properties from the parent class
+        this.priority = priority;   // Additional property for this subclass
     }
 }
 
 
-// --- 2. Mengelola kumpulan data todo / todo list ---
-// ===================================================
+// --- 2. Manages the collection of todo data / todo list ---
+// ============================================================
 class TodoList {
     constructor() {
     this.todos = [];
     this.apiUrl =
-    'https://my-json-server.typicode.com/Yusuf-98/todoList-API/todos'; // Menyediakan API custom sendiri berisi (id, title, completed, priority)
+    'https://my-json-server.typicode.com/Yusuf-98/todoList-API/todos'; // Custom API, used as seed data on first load
+    this.storageKey = 'todoapp.todos'; // localStorage key used for persistence
     }
 
-    // --- 2.1. Async/Await & Fetch (Load Data) dengan menggunakan try catch ---
-    async fetchTodos() {
+    // --- 2.1. Load data: use localStorage if it already exists, otherwise fetch seed data from the API ---
+    async loadTodos() {
+        const cached = localStorage.getItem(this.storageKey);
+
+        if (cached) {
+            this.todos = JSON.parse(cached).map(
+                (todo) => new PriorityTodo(todo.id, todo.title, todo.completed, todo.priority || 1)
+            );
+            return;
+        }
+
         try {
-            // Fetching data dari API 
+            // Fetching seed data from the API (only once, when localStorage is still empty)
             const response = await fetch(`${this.apiUrl}`);
             if (!response.ok) throw new Error('Request failed');
-            
+
             const data = await response.json();
             this.todos = data.map(
             (todo) => new PriorityTodo(todo.id, todo.title, todo.completed, todo.priority || 1 )
             );
 
-            // Melakukan sort berdasarkan priority (priority 3 (High) disusun paling atas di todo list)
+            // Sort by priority (priority 3 / High appears at the top of the list)
             this.todos.sort((a, b) => (b.priority || 0) - (a.priority || 0));
+            this.saveTodos();
 
         } catch (error) {
             console.error('Error:', error);
-            throw error; // Lempar kembali ke UI untuk ditangani
+            throw error; // Re-throw so the UI can handle it
         }
     }
 
-    // --- 2.2. Async/Await & Fetch (Post Data) dengan menggunakan try catch ---
-    async addTodo(title, priority) {
-        try {
-            // Fetching data ke API
-            const response = await fetch(this.apiUrl, {
-                method: 'POST',                
-                body: JSON.stringify({ title, completed: false, userId: 1 }),  // Convert Javascript Object menjadi JSON String   
-                headers: { 'Content-type': 'application/json; charset=UTF-8' },// Menginformasikan ke server jika request body mengandung JSON Data yg di encode di UTF-8
-            });
-
-            if (!response.ok) throw new Error('Data submission error');
-
-            // Menggunakan PriorityTodo hasil inheritance
-            const newTodo = new PriorityTodo(
-                Date.now(),
-                title,
-                false,
-                parseInt(priority)
-            );
-            
-            // Menambahkan data ke depan list data yang sudah ada
-            this.todos.unshift(newTodo);
-            // Sort otomatis setelah tambah: Priority 3 (High) ke 1 (Low)
-            this.todos.sort((a, b) => (b.priority || 0) - (a.priority || 0));
-
-            return newTodo;
-        } catch (error) {
-            console.error('Error:', error);
-            throw error;
-        }
+    // --- 2.2. Save the current todos state to localStorage ---
+    saveTodos() {
+        localStorage.setItem(this.storageKey, JSON.stringify(this.todos));
     }
 
-    // --- 2.3. Fungsi untuk edit todo title ---
+    // --- 2.3. Add a new todo (saved to localStorage immediately) ---
+    addTodo(title, priority) {
+        // Uses the PriorityTodo subclass
+        const newTodo = new PriorityTodo(
+            Date.now(),
+            title,
+            false,
+            parseInt(priority)
+        );
+
+        // Add the new item to the front of the list
+        this.todos.unshift(newTodo);
+        // Re-sort after adding: Priority 3 (High) down to 1 (Low)
+        this.todos.sort((a, b) => (b.priority || 0) - (a.priority || 0));
+        this.saveTodos();
+
+        return newTodo;
+    }
+
+    // --- 2.4. Edit a todo's title ---
     updateTodo(id, newTitle) {
         const todo = this.todos.find((t) => t.id === id);
         if (todo) {
             todo.title = newTitle;
+            this.saveTodos();
         }
     }
 
-    // --- 2.4. Fungsi untuk menandai sudah dikerjakan atau belum ---
+    // --- 2.5. Toggle a todo's completed state ---
     toggleTodo(id) {
         const todo = this.todos.find((t) => t.id === id);
         if (todo) {
             todo.completed = !todo.completed;
+            this.saveTodos();
         }
     }
 
-    // --- 2.5. Fungsi untuk menghapus todo ---
+    // --- 2.6. Delete a todo ---
     deleteTodo(id) {
         this.todos = this.todos.filter((t) => t.id !== id);
+        this.saveTodos();
     }
 }
 
 
-// --- 3. Global Variabel dan Fungsi untuk UI Controller / DOM Manipulation ---
-// ==============================================================================
+// --- 3. Global variables and functions for the UI controller / DOM manipulation ---
+// =====================================================================================
 const list = new TodoList();
+const todoForm = document.querySelector('.input-area');
 const todoInput = document.getElementById('todo-input');
-const addBtn = document.getElementById('add-btn');
 const taskList = document.getElementById('task-list');
 const emptyImage = document.querySelector('.empty-image');
 const priorityInput = document.getElementById('priority-input');
@@ -115,7 +121,17 @@ const progressBar = document.getElementById('progress');
 const progressNumbers = document.getElementById('numbers');
 const statsNumber = document.querySelector('.stats-number');
 
-// Fungsi untuk menampilkan animasi detik sebagai bingkai statistik number
+// Escapes user text before inserting it into innerHTML (prevents XSS)
+const escapeHtml = (text) =>
+    text.replace(/[&<>"']/g, (ch) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+    }[ch]));
+
+// Builds the animated digit frames for the stats number
 const numberElement = [];
 for (let i=1 ; i<=60 ; i++) {
     numberElement.push(
@@ -124,13 +140,13 @@ for (let i=1 ; i<=60 ; i++) {
 }
 statsNumber.insertAdjacentHTML("afterbegin", numberElement.join(""));
 
-// Fungsi untuk menampilkan gambar background jika list kosong dan setting lebar form aplikasi
+// Shows the empty-state image when the list is empty and adjusts the app's width
 const toggleEmptyTask = () => {
     emptyImage.style.display = list.todos.length === 0 ? 'block' : 'none';
     todosContainer.style.width = list.todos.length > 0 ? '100%' : '80%';
 };
 
-// Fungsi untuk menampilkan progress bar dan progress number
+// Updates the progress bar and progress number
 const updateProgress = (checkCompletion = true) => {
     const totalTasks = list.todos.length;
     const completedTasks = taskList.querySelectorAll('.checkbox:checked').length;
@@ -142,33 +158,33 @@ const updateProgress = (checkCompletion = true) => {
 };
 
 
-// --- 4. Fungsi Utama ---
-// =======================
+// --- 4. Main render function ---
+// ================================
 function render() {
-    // Daftar list semula dibuat kosong
+    // Clear the list first
     taskList.innerHTML = '';
 
-    // Fungsi menampilkan gambar jika daftar list kosong
+    // Show the empty-state image if the list is empty
     toggleEmptyTask();
 
-    // Memanggil fungsi ToDoList dan mengelola masing2 data list-nya
+    // Iterate over the todo list and render each item
     list.todos.forEach((todo) => {
-        // Menambah Elemen list baru
+        // Create a new list element
         const li = document.createElement('li');
-        // Tentukan status list
+        // Set the completed state class
         li.className = todo.completed ? 'completed' : '';
-        // Tentukan label prioritas
+        // Determine the priority label
         const prioLabels = { 1: 'Low', 2: 'Medium', 3: 'High' };
         const prioClass = todo.priority ? `prio-${todo.priority}` : 'prio-1';
         const prioLabel = todo.priority ? prioLabels[todo.priority] : 'Low';
-        // Tentukan isi dari Elemen list baru yang dibuat
+        // Build the new list item's content (title is escaped to prevent XSS)
         li.innerHTML = `
             <div class="task-content" >
                 <input type='checkbox' class="checkbox" ${todo.completed ? 'checked' : ''}>
-                <span class="todo-text">${todo.title}</span>
+                <span class="todo-text">${escapeHtml(todo.title)}</span>
                 <span class="priority-badge ${prioClass}">${prioLabel}</span>
             </div>
-            
+
             <div class = 'task-buttons'>
                 <button class = 'edit-btn'><i class='fa-solid fa-pen'></i></button>
                 <button class='delete-btn'><i class='fa-solid fa-trash'></i></button>
@@ -178,25 +194,25 @@ function render() {
         const editBtn = li.querySelector('.edit-btn');
         const todoTextSpan = li.querySelector('.todo-text');
 
-        // Jika list selesai maka edit button tidak aktif
+        // Disable the edit button when the task is completed
         if (todo.completed) {
             editBtn.disabled = true;
             editBtn.classList.add('btn-disabled');
         }
-        
-        // Jika Edit Button di klik
+
+        // Handle edit button click
         editBtn.addEventListener('click', () => {
-            // Jika sedang tidak dalam mode edit
+            // Only enter edit mode if not already editing
             if (!li.classList.contains('editing')) {
                 li.classList.add('editing');
                 const currentTitle = todoTextSpan.textContent;
 
-                // Ubah span menjadi input text
-                todoTextSpan.innerHTML = `<input type="text" class="edit-input" value="${currentTitle}">`;
+                // Replace the span with a text input
+                todoTextSpan.innerHTML = `<input type="text" class="edit-input" value="${escapeHtml(currentTitle)}">`;
                 const input = todoTextSpan.querySelector('.edit-input');
                 input.focus();
 
-                // Fungsi simpan setelah edit
+                // Save the edit
                 const saveEdit = () => {
                     const newTitle = input.value.trim();
                     if (newTitle) {
@@ -205,7 +221,7 @@ function render() {
                     render();
                 };
 
-                // Simpan saat tekan Enter atau klik di luar
+                // Save on Enter key or on blur
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') saveEdit();
                 });
@@ -213,67 +229,62 @@ function render() {
             }
         });
 
-        // Fungsi mengubah status completed true menjadi false atau sebaliknya
+        // Toggle the completed state
         li.querySelector('.checkbox').addEventListener('click', () => {
             list.toggleTodo(todo.id);
             render();
         });
 
-        // Fungsi untuk menghapus todo
+        // Delete the todo
         li.querySelector('.delete-btn').addEventListener('click', () => {
             list.deleteTodo(todo.id);
             render();
         });
 
-        // Menambahkan list pada Daftar list
+        // Append the item to the list
         taskList.appendChild(li);
     });
 
-    updateProgress();   // Memanggil fungsi untuk progressbar dan progress number
-    todoInput.focus();  // Mengembalikan focus ke Input Text
+    updateProgress();   // Update the progress bar and progress number
+    todoInput.focus();  // Return focus to the input field
 }
 
 
-// --- 5. Jika Add Button di kilk ---
-// ===============================
-addBtn.addEventListener('click', async () => {
-    const title = todoInput.value;
+// --- 5. Handle the add-task form submit (button click or Enter key) ---
+// =========================================================================
+todoForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent the form from reloading the page
+
+    const title = todoInput.value.trim();
     const priority = priorityInput.value;
-    // Jika Input Text masih kosong
+
+    // If the input is still empty
     if (!title) {
-        // Menggunakan fitur validasi bawaan browser
+        // Use the browser's built-in validation
         todoInput.setCustomValidity('Please write a task.');
-        // Paksa browser menampilkan pesan tersebut (gelembung/tooltip)
+        // Force the browser to show the validation tooltip
         todoInput.reportValidity();
         return;
     }
 
-    try {
-        addBtn.disabled = true;
+    // Add the title and priority to the list; saved to localStorage immediately
+    list.addTodo(title, priority);
 
-        // Kirim title dan priority ke list todo
-        await list.addTodo(title, priority);
-
-        todoInput.value = '';
-        render();
-    } catch (error) {
-        alert('Failed to push data to server');
-    } finally {
-        addBtn.disabled = false;
-    }
+    todoInput.value = '';
+    render();
 });
 
-// Menutup validasi saat mengetik
+// Clear the custom validation message while typing
 todoInput.addEventListener('input', () => {
-    todoInput.setCustomValidity(''); // Menghapus pesan error kustom
+    todoInput.setCustomValidity('');
 });
 
 
-// --- 6. Fungsi Load Data Awal ---
-// ================================
+// --- 6. Initial data load ---
+// =============================
 async function init() {
     try {
-        await list.fetchTodos();
+        await list.loadTodos();
         render();
     } catch (error) {
         taskList.innerHTML =
@@ -281,5 +292,5 @@ async function init() {
     }
 }
 
-// Memanggil fungsi Load Data Awal
+// Kick off the initial data load
 init();
