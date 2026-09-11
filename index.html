@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List App by Yusuf AR</title>
+    <meta name="description" content="A fast, no-framework task manager built with vanilla JavaScript. Add tasks, set priorities, track progress, and pick up right where you left off.">
+    <meta property="og:title" content="To-Do App by Yusuf AR">
+    <meta property="og:description" content="A fast, no-framework task manager built with vanilla JavaScript. Add tasks, set priorities, track progress, and pick up right where you left off.">
+    <meta property="og:image" content="https://todo-list-by-yusuf-ar.vercel.app/assets/og-image.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://todo-list-by-yusuf-ar.vercel.app/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235240ab'/%3E%3Cpath d='M9 17l5 5 9-11' fill='none' stroke='%230ef' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,13 +34,13 @@
           </div>
         </div>
         <form class="input-area">
-          <input type="text" id="todo-input" placeholder="Add a new task...">
-          <select id="priority-input">
+          <input type="text" id="todo-input" placeholder="Add a new task..." aria-label="New task">
+          <select id="priority-input" aria-label="Task priority">
             <option value="1">Low</option>
             <option value="2">Med</option>
             <option value="3">High</option>
           </select>
-          <button type="submit" id="add-btn"><i class="fa-solid fa-plus"></i></button>
+          <button type="submit" id="add-btn" aria-label="Add task"><i class="fa-solid fa-plus"></i></button>
         </form>
         <div class="todos-container">
           <ul id="task-list">

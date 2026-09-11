@@ -4,6 +4,8 @@ A fast, no-framework task manager built with vanilla JavaScript — no build ste
 
 🚀 **Live demo:** https://todo-list-by-yusuf-ar.vercel.app/
 
+![To-Do App screenshot](./assets/screenshot.jpg)
+
 ## Features
 
 - Add, edit, and delete tasks
@@ -34,3 +36,7 @@ Then simply open `index.html` in your browser, or serve the folder with any stat
 ## Author
 
 Built by [Yusuf AR](https://github.com/Yusuf-98).
+
+## License
+
+[MIT](./LICENSE)

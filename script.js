@@ -180,14 +180,14 @@ function render() {
         // Build the new list item's content (title is escaped to prevent XSS)
         li.innerHTML = `
             <div class="task-content" >
-                <input type='checkbox' class="checkbox" ${todo.completed ? 'checked' : ''}>
+                <input type='checkbox' class="checkbox" aria-label="Mark task as completed" ${todo.completed ? 'checked' : ''}>
                 <span class="todo-text">${escapeHtml(todo.title)}</span>
                 <span class="priority-badge ${prioClass}">${prioLabel}</span>
             </div>
 
             <div class = 'task-buttons'>
-                <button class = 'edit-btn'><i class='fa-solid fa-pen'></i></button>
-                <button class='delete-btn'><i class='fa-solid fa-trash'></i></button>
+                <button class = 'edit-btn' aria-label="Edit task"><i class='fa-solid fa-pen'></i></button>
+                <button class='delete-btn' aria-label="Delete task"><i class='fa-solid fa-trash'></i></button>
             </div>
         `;
 
