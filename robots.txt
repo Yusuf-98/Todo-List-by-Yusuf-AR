@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://todo-list-by-yusuf-ar.vercel.app/sitemap.xml
