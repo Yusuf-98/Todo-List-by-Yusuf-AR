@@ -24,7 +24,12 @@ A fast, no-framework task manager built with vanilla JavaScript — no build ste
 
 ## Tech Stack
 
-- HTML5, CSS3
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white)
+![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+
 - JavaScript (ES6+ Classes, Async/Await)
 - DOM manipulation
 - Fetch API for the initial data load
