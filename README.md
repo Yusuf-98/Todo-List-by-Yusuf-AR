@@ -55,6 +55,34 @@ npm install
 npm run lint
 ```
 
+## Performance
+
+- The background image is served as WebP, compressed from a 944 KB JPEG to about 103 KB with no visible quality loss.
+- Screenshots in this README are compressed WebP, around 40–50 KB each.
+- No framework or bundler — the whole app is one small HTML, CSS and JS file each, with no build output to ship.
+
+## API
+
+The app talks to a small seed API ([todoList-API](https://github.com/Yusuf-98/todoList-API), served through [my-json-server](https://my-json-server.typicode.com/)):
+
+- `GET /todos` — fetched once, only when `localStorage` is empty, to populate the initial task list. After that, all changes are read from and written to `localStorage` directly.
+
+## Project structure
+
+```
+├── index.html
+├── script.js
+├── style.css
+└── assets/
+    ├── background-image.webp
+    ├── screenshot-*.webp
+    └── og-image.jpg
+```
+
+## Deployment
+
+Deployed on Vercel as a static site — no build configuration needed.
+
 ## Author
 
 Built by [Yusuf AR](https://github.com/Yusuf-98).
