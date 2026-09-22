@@ -55,7 +55,11 @@ class TodoList {
 
     // --- Save ---
     saveTodos() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.todos));
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.todos));
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     // --- Add ---
