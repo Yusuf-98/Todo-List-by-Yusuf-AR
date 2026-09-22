@@ -1,0 +1,13 @@
+{
+  "name": "todo-list-by-yusuf-ar",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A fast, no-framework task manager built with vanilla JavaScript.",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^9.19.0"
+  }
+}
