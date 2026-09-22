@@ -85,8 +85,9 @@ body {
   width: 100%;
 }
 
-.details-progress h3 {
+.details-progress h2 {
   color: #fff;
+  font-size: 1rem;
 }
 
 /* Progress bar */

@@ -11,6 +11,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://todo-list-by-yusuf-ar.vercel.app/">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#5240ab">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235240ab'/%3E%3Cpath d='M9 17l5 5 9-11' fill='none' stroke='%230ef' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
@@ -24,7 +25,7 @@
         </div>
         <div class="stat-container">
           <div class="details-progress">
-            <h3>Your progress...</h3>
+            <h2>Your progress...</h2>
             <div id="progressbar">
               <div id="progress"></div>
             </div>
@@ -43,7 +44,7 @@
           <button type="submit" id="add-btn" aria-label="Add task"><i class="fa-solid fa-plus"></i></button>
         </form>
         <div class="todos-container">
-          <ul id="task-list">
+          <ul id="task-list" aria-live="polite">
               <li class="loading">Loading tasks...</li>
           </ul>
           <img class="empty-image" src="./assets/To-Do-List-No-Tasks.svg" alt="Image of to-do list note">
