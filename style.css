@@ -155,20 +155,30 @@ body {
   left: 27px;
   width: 0.4rem;
   height: 0.07rem;
-  background: #587290;
+  background: #2c4766;
   border-radius: 3px;
   transform-origin: 22px;
   transform: scale(2.2) rotate(calc(var(--index) * (360deg / 60)));
+  overflow: hidden;
+}
+
+.stats-number span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #0ef;
+  border-radius: inherit;
+  opacity: 0;
   animation: animateSecond 60s linear infinite;
   animation-delay: calc(var(--index) * (60s / 60));
 }
 
 @keyframes animateSecond {
   0% {
-    background: #0ef;
+    opacity: 1;
   }
   25% {
-    background: #2c4766;
+    opacity: 0;
   }
 }
 
