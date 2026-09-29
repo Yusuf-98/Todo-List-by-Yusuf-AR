@@ -266,7 +266,7 @@ body {
   border-radius: 10px;
   max-width: 70px;
   text-align: center;
-  color: white;
+  color: #000;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -405,9 +405,9 @@ body {
 }
 
 /* Completed */
-#task-list li.completed span {
+#task-list li.completed .todo-text {
   text-decoration: 2px line-through #000;
-  color: rgba(0255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* Task buttons */
