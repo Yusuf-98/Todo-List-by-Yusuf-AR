@@ -345,6 +345,7 @@ body {
 
 /* Empty state */
 .empty-image {
+  display: none;
   max-width: 300px;
   margin-top: 50px;
 }
