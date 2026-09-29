@@ -169,8 +169,12 @@ function render() {
             </div>
 
             <div class = 'task-buttons'>
-                <button class = 'edit-btn' aria-label="Edit task"><i class='fa-solid fa-pen'></i></button>
-                <button class='delete-btn' aria-label="Delete task"><i class='fa-solid fa-trash'></i></button>
+                <button class = 'edit-btn' aria-label="Edit task">
+                    <svg class="icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M352.9 21.2L308 66.1 445.9 204 490.8 159.1C504.4 145.6 512 127.2 512 108s-7.6-37.6-21.2-51.1L455.1 21.2C441.6 7.6 423.2 0 404 0s-37.6 7.6-51.1 21.2zM274.1 100L58.9 315.1c-10.7 10.7-18.5 24.1-22.6 38.7L.9 481.6c-2.3 8.3 0 17.3 6.2 23.4s15.1 8.5 23.4 6.2l127.8-35.5c14.6-4.1 27.9-11.8 38.7-22.6L412 237.9 274.1 100z"/></svg>
+                </button>
+                <button class='delete-btn' aria-label="Delete task">
+                    <svg class="icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"/></svg>
+                </button>
             </div>
         `;
 

@@ -6,6 +6,13 @@
   box-sizing: border-box;
 }
 
+/* Icon */
+.icon {
+  width: 1.02em;
+  height: 1.02em;
+  vertical-align: -0.125em;
+}
+
 body {
   font-family: 'Jost', sans-serif;
   display: flex;
