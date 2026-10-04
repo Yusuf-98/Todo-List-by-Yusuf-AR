@@ -23,7 +23,7 @@ A fast, no-framework task manager built with vanilla JavaScript — no build ste
 - Priority levels (Low / Medium / High) with color-coded tags
 - Progress tracker (completed / total) with an animated ring and progress bar
 - Tasks persist across page reloads via `localStorage`
-- Loads its initial task list from a custom REST API ([todoList-API](https://github.com/Yusuf-98/todoList-API), served through [my-json-server](https://my-json-server.typicode.com/))
+- Loads its initial task list from a JSON seed file with the Fetch API
 
 ## Screenshots
 
@@ -102,13 +102,14 @@ Run it yourself with [PageSpeed Insights](https://pagespeed.web.dev/analysis?url
 - **Google Fonts** is requested without the unused italic axis (halving the font payload), loaded via `rel="preload"` with an `onload` swap so it never blocks rendering, and `style.css` carries `fetchpriority="high"` so it wins the bandwidth race against the font on slow connections.
 - **`script.js`** loads with `defer` so it never blocks the initial paint.
 - **The progress ring's tick animation** animates `opacity` (GPU-composited) instead of `background-color`, cutting continuous repaint work from ~41 ms to ~1 ms per 5 seconds while the tab is open.
-- **`preconnect`** hints for Google Fonts and the seed-data API cut connection setup time off the critical path.
+- **Seed data** is a static `db.json` served from the same origin, so the first load needs no extra connection to a third-party API.
+- **`preconnect`** hints for Google Fonts cut connection setup time off the critical path.
 
 ## API
 
-The app talks to a small seed API ([todoList-API](https://github.com/Yusuf-98/todoList-API), served through [my-json-server](https://my-json-server.typicode.com/)):
+The initial task list comes from [`db.json`](db.json), deployed alongside the app:
 
-- `GET /todos` — fetched once, only when `localStorage` is empty, to populate the initial task list. After that, all changes are read from and written to `localStorage` directly.
+- `GET /db.json` — fetched once, only when `localStorage` is empty, to populate the initial task list from its `todos` array. After that, all changes are read from and written to `localStorage` directly.
 
 ## Project structure
 
@@ -116,6 +117,7 @@ The app talks to a small seed API ([todoList-API](https://github.com/Yusuf-98/to
 ├── index.html
 ├── script.js
 ├── style.css
+├── db.json
 └── assets/
     ├── background-image.webp
     ├── screenshot-*.webp
