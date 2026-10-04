@@ -19,8 +19,7 @@ class PriorityTodo extends Todo {
 class TodoList {
     constructor() {
     this.todos = [];
-    this.apiUrl =
-    'https://my-json-server.typicode.com/Yusuf-98/todoList-API/todos';
+    this.apiUrl = 'db.json';
     this.storageKey = 'todoapp.todos';
     }
 
@@ -39,8 +38,8 @@ class TodoList {
             const response = await fetch(`${this.apiUrl}`);
             if (!response.ok) throw new Error('Request failed');
 
-            const data = await response.json();
-            this.todos = data.map(
+            const { todos } = await response.json();
+            this.todos = todos.map(
             (todo) => new PriorityTodo(todo.id, todo.title, todo.completed, todo.priority || 1 )
             );
 
