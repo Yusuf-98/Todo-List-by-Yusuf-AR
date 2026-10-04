@@ -97,13 +97,12 @@ Run it yourself with [PageSpeed Insights](https://pagespeed.web.dev/analysis?url
 ### How it stays fast
 
 - **Icons** are inline SVG matched to Font Awesome's exact paths, instead of loading Font Awesome's CSS and font file from a CDN for 3 glyphs.
-- **Background image** is served as WebP, compressed from a 944 KB JPEG to about 82 KB with no visible quality loss.
+- **Background image** is served as WebP, compressed from a 944 KB JPEG to about 82 KB, with a 29 KB variant for screens narrower than 768 px.
 - **Empty-state illustration** is compressed 75% with SVGO (73 KB → 18 KB), has explicit `width`/`height` to avoid layout shift, and is `loading="lazy"` with `display: none` by default — so it isn't fetched at all on the common path where the list already has tasks.
-- **Google Fonts** is requested without the unused italic axis (halving the font payload), loaded via `rel="preload"` with an `onload` swap so it never blocks rendering, and `style.css` carries `fetchpriority="high"` so it wins the bandwidth race against the font on slow connections.
+- **Jost** is self-hosted as a single variable latin `woff2` (26 KB, weights 100–900) with `font-display: swap`, so text renders immediately and no request goes to a third-party font host. `style.css` carries `fetchpriority="high"`.
 - **`script.js`** loads with `defer` so it never blocks the initial paint.
 - **The progress ring's tick animation** animates `opacity` (GPU-composited) instead of `background-color`, cutting continuous repaint work from ~41 ms to ~1 ms per 5 seconds while the tab is open.
-- **Seed data** is a static `db.json` served from the same origin, so the first load needs no extra connection to a third-party API.
-- **`preconnect`** hints for Google Fonts cut connection setup time off the critical path.
+- **Seed data** is a static `db.json` served from the same origin, so every request on first load goes to one domain.
 
 ## API
 
@@ -119,7 +118,9 @@ The initial task list comes from [`db.json`](db.json), deployed alongside the ap
 ├── style.css
 ├── db.json
 └── assets/
+    ├── fonts/jost-latin.woff2
     ├── background-image.webp
+    ├── background-image-mobile.webp
     ├── screenshot-*.webp
     └── og-image.jpg
 ```
