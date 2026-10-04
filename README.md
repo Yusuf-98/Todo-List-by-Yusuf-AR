@@ -10,7 +10,7 @@ A fast, no-framework task manager built with vanilla JavaScript — no build ste
   <img src="assets/screenshot-progress.webp" alt="To-Do App with a partially completed list and progress bar" width="420">
 </p>
 
-[![Lighthouse](https://img.shields.io/badge/Lighthouse-93_mobile_%C2%B7_99_desktop-brightgreen?logo=lighthouse&logoColor=white)](#performance)
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-99_mobile_%C2%B7_100_desktop-brightgreen?logo=lighthouse&logoColor=white)](#performance)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
@@ -58,29 +58,29 @@ npm run lint
 
 ## Performance
 
-Lighthouse results for the [live site](https://todo-list-by-yusuf-ar.vercel.app/): the median of 10 mobile and 6 desktop runs on 30 September 2026 (Lighthouse 13.5.0).
+Lighthouse results for the [live site](https://todo-list-by-yusuf-ar.vercel.app/): the median of 10 mobile runs and a single desktop run on 5 October 2026 (Lighthouse 13.5.0).
 
 | | 📱 Mobile | 🖥️ Desktop |
 | --- | :---: | :---: |
-| **Performance** | **93** | **99** |
+| **Performance** | **99** | **100** |
 | **Accessibility** | **100** | **100** |
 | **Best practices** | **100** | **100** |
 | **SEO** | **100** | **100** |
 
-Mobile performance ranged from 90 to 99 across the 10 runs; desktop ranged from 98 to 100 across the 6 runs.
+Mobile performance ranged from 97 to 99 across the 10 runs (99 in nine of them); accessibility, best practices and SEO scored 100 in every run.
 
 ### Core metrics
 
 | Metric | 📱 Mobile | 🖥️ Desktop | Good if |
 | --- | :---: | :---: | :---: |
-| **First Contentful Paint** (first pixels) | 🔴 2.5 s | 🟢 0.8 s | ≤ 1.8 s |
-| **Largest Contentful Paint** (main content visible) | 🔴 2.5 s | 🟢 0.8 s | ≤ 2.5 s |
-| **Total Blocking Time** (page unresponsive) | 🟢 0 ms | 🟢 0 ms | ≤ 200 ms |
-| **Cumulative Layout Shift** (content jumping) | 🟢 0.057 | 🟢 0.035 | ≤ 0.1 |
-| **Speed Index** (how fast it fills in) | 🟢 2.5 s | 🟢 0.8 s | ≤ 3.4 s |
-| **Page weight** (compressed) | 115 KiB | 115 KiB | |
+| **First Contentful Paint** (first pixels) | 🟢 1.1 s | 🟢 0.3 s | ≤ 1.8 s |
+| **Largest Contentful Paint** (main content visible) | 🟢 1.3 s | 🟢 0.4 s | ≤ 2.5 s |
+| **Total Blocking Time** (page unresponsive) | 🟢 38 ms | 🟢 0 ms | ≤ 200 ms |
+| **Cumulative Layout Shift** (content jumping) | 🟢 0.061 | 🟢 0.033 | ≤ 0.1 |
+| **Speed Index** (how fast it fills in) | 🟢 2.2 s | 🟢 0.6 s | ≤ 3.4 s |
+| **Page weight** (compressed) | 64 KiB | 115 KiB | |
 
-🟢 within Google's "good" range · figures are medians
+🟢 within Google's "good" range · mobile figures are medians
 
 ### What "mobile" means in this test
 
